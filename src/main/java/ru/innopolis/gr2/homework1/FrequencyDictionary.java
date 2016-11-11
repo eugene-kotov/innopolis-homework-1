@@ -1,5 +1,8 @@
 package ru.innopolis.gr2.homework1;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -9,17 +12,21 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class FrequencyDictionary {
 
+    private static Logger logger = LoggerFactory.getLogger(FrequencyDictionary.class);
     private Map<String, Integer> wordDictionary = new ConcurrentHashMap<String, Integer>();
 
-    public void add(String token) {
+    public void add(String token, Object monitor) {
 
         token = token.toLowerCase();
 
-        if (!wordDictionary.containsKey(token)) {
-            wordDictionary.put(token, 1);
-        } else {
-            int count = wordDictionary.get(token);
-            wordDictionary.put(token, ++count);
+        synchronized (monitor) {
+            if (!wordDictionary.containsKey(token)) {
+                wordDictionary.put(token, 1);
+            } else {
+                int count = wordDictionary.get(token);
+                wordDictionary.put(token, ++count);
+            }
+            notifyAll();
         }
 
     }
