@@ -3,10 +3,11 @@ package ru.innopolis.gr2.homework1;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Arrays;
 import java.util.Map;
 
 /**
- * Created by eugene on 11.11.16.
+ * Created by eugene on 07.11.16.
  */
 public class ReportBuilder extends Thread {
 
@@ -30,17 +31,17 @@ public class ReportBuilder extends Thread {
                     printResult();
                 } catch (InterruptedException e) {
                     log.error("Unexpected error", e);
-                    //e.printStackTrace();
                 }
             }
         }
     }
 
+    /**
+     * Выводит отчёт по найденным словам
+     */
     public void printResult(){
 
-        for (Map.Entry entry : frequencyDictionary.getWordDictionary().entrySet()) {
-            System.out.format("%s : %s \n", entry.getKey(), entry.getValue().toString());
-        }
+        log.info(Arrays.asList(frequencyDictionary.getWordDictionary()).toString());
 
     }
 }

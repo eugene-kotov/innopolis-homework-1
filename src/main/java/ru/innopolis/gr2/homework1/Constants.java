@@ -5,7 +5,8 @@ package ru.innopolis.gr2.homework1;
  */
 public class Constants {
 
-    public final static String DELIMS = " :;,.{}()\t\n";
-    public final static String CORRECT_SYMBOLS = "[а-яё0-9]*";
+    public final static String DELIMS = ",|!|\\?|\\n|\\r|\\s|\\.|-|\\(|\\)";
+    public final static String CORRECT_SYMBOLS = "[а-яА-ЯЁё0-9]+";
+    public final static String ALPHABET = "[а-яё]+";
 
 }
